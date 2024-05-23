@@ -29,31 +29,45 @@ public class CalculatorController {
                 operator = value;
                 num1 = Double.parseDouble(display.getText());
                 display.setText("");
-            } else {
-                if (operator.isEmpty()) {
-                    return;
-                }
-                double num2 = Double.parseDouble(display.getText());
-                double result = calculate(num1, num2, operator);
-                display.setText(String.valueOf(result));
-                operator = "";
-                start = true;
             }
         }
     }
 
+    @FXML
+    private void handleEqualAction(javafx.event.ActionEvent event) {
+        if (operator.isEmpty()) {
+            return;
+        }
+        double num2 = Double.parseDouble(display.getText());
+        double result = calculate(num1, num2, operator);
+        display.setText(String.valueOf(result));
+        operator = "";
+        start = true;
+    }
+
+    @FXML
+    private void handleResetAction(javafx.event.ActionEvent event) {
+        display.setText("");
+        num1 = 0;
+        operator = "";
+        start = true;
+    }
+
     private double calculate(double num1, double num2, String operator) {
-        return switch (operator) {
-            case "+" -> num1 + num2;
-            case "-" -> num1 - num2;
-            case "*" -> num1 * num2;
-            case "/" -> {
+        switch (operator) {
+            case "+":
+                return num1 + num2;
+            case "-":
+                return num1 - num2;
+            case "*":
+                return num1 * num2;
+            case "/":
                 if (num2 == 0) {
-                    yield 0;
+                    return 0;
                 }
-                yield num1 / num2;
-            }
-            default -> 0;
-        };
+                return num1 / num2;
+            default:
+                return 0;
+        }
     }
 }

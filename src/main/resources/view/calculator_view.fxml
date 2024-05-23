@@ -21,4 +21,8 @@
     <Button text="8" onAction="#handleButtonAction" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
     <Button text="9" onAction="#handleButtonAction" GridPane.rowIndex="3" GridPane.columnIndex="2"/>
     <Button text="÷" onAction="#handleButtonAction" GridPane.rowIndex="3" GridPane.columnIndex="3"/>
+    <Button text="C" onAction="#handleResetAction" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+    <Button text="0" onAction="#handleButtonAction" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+    <Button text="=" onAction="#handleEqualAction" GridPane.rowIndex="4" GridPane.columnIndex="2"
+            GridPane.columnSpan="2"/>
 </GridPane>
