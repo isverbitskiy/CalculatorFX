@@ -52,7 +52,7 @@ project-root/
 
 1. **Clone the repository:**
    ```sh
-   git clone https://github.com/yourusername/CalculatorFX.git
+   git clone https://github.com/isverbitskiy/CalculatorFX.git
    cd CalculatorFX
    ```
 2. **Set the JavaFX SDK path:**
