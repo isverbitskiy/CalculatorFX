@@ -15,7 +15,7 @@ public class CalculatorApp extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(CalculatorApp.class.getResource("/view/calculator_view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(CalculatorApp.class.getResource("/view/calculator.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 300, 400);
         stage.setTitle("Calculator");
         stage.setScene(scene);
