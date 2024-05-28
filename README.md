@@ -24,7 +24,7 @@ arithmetic operations and percentage calculations.
 **Project Structure:**
 
 ```
-project-root/
+Calculator/
 ├── src/
 │   ├── main/
 │   │   ├── java/
@@ -54,7 +54,6 @@ project-root/
 1. **Clone the repository:**
    ```sh
    git clone https://github.com/isverbitskiy/CalculatorFX.git
-   cd CalculatorFX
    ```
 2. **Set the JavaFX SDK path:**
    ```sh
@@ -64,12 +63,6 @@ project-root/
    ```sh
    mvn clean compile exec:java
    ```
-
-**Future Enhancements:**
-
-- Implement advanced mathematical functions such as trigonometry and logarithms.
-- Add a history feature to track previous calculations.
-- Enhance the UI with custom themes and styles.
 
 **Contributing:**
 Contributions are welcome! Please fork this repository and submit pull requests for any enhancements or bug fixes.
