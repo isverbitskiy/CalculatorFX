@@ -42,7 +42,8 @@ project-root/
 │   │   │   └── com/
 │   │   │       └── example/
 │   │   │           └── calculator/
-│   │   │               ├── CalculatorControllerTest.java
+│   │   │               ├── controller/
+│   │   │               │   └── CalculatorControllerTest.java
 │   │   │               └── helper/
 │   │   │                   └── TestHelper.java
 ├── pom.xml
