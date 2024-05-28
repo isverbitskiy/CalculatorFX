@@ -3,72 +3,113 @@ package com.example.calculator.controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
+import java.util.Optional;
+
 public class CalculatorController {
     @FXML
     public TextField display;
 
-    public boolean start = true;
+    private boolean start = true;
     private double num1 = 0;
     private String operator = "";
 
     @FXML
     void handleButtonAction(javafx.event.ActionEvent event) {
         String value = ((javafx.scene.control.Button) event.getSource()).getText();
-        if ("0123456789.".contains(value)) {
-            if (start) {
-                display.setText(value);
-                start = false;
-            } else {
-                display.setText(display.getText() + value);
-            }
-        } else {
-            if (!"=".equals(value)) {
-                if (!operator.isEmpty()) {
-                    return;
-                }
-                operator = value;
-                num1 = Double.parseDouble(display.getText());
-                display.setText(display.getText() + " " + value + " ");
-            }
+        if (isNumeric(value)) {
+            appendToDisplay(value);
+        } else if (!"=".equals(value)) {
+            setOperator(value);
         }
     }
 
     @FXML
     void handleEqualAction(javafx.event.ActionEvent event) {
-        if (operator.isEmpty()) {
+        if (isOperatorEmpty() || !isValidExpression()) {
+            return;
+        }
+        double num2 = parseOperand(display.getText().split(" ")[2]).orElse(0.0);
+        double result = calculate(num1, num2, operator);
+        display.setText(formatResult(result));
+        resetState();
+    }
+
+    @FXML
+    void handleResetAction(javafx.event.ActionEvent event) {
+        resetDisplay();
+    }
+
+    @FXML
+    void handleSignChangeAction(javafx.event.ActionEvent event) {
+        parseOperand(display.getText()).ifPresent(value ->
+                display.setText(formatResult(value * -1))
+        );
+    }
+
+    @FXML
+    public void handlePercentageAction(javafx.event.ActionEvent event) {
+        if (isOperatorEmpty() || start) {
             return;
         }
         String[] parts = display.getText().split(" ");
         if (parts.length < 3) {
             return;
         }
-        double num2 = Double.parseDouble(parts[2]);
-        double result = calculate(num1, num2, operator);
+        double base = parseOperand(parts[0]).orElse(0.0);
+        double percentage = parseOperand(parts[2]).orElse(0.0) / 100;
+        double result = calculatePercentage(base, percentage, operator);
         display.setText(formatResult(result));
-        operator = "";
-        start = true;
+        resetState();
     }
 
-    @FXML
-    void handleResetAction(javafx.event.ActionEvent event) {
+    private boolean isNumeric(String value) {
+        return "0123456789.".contains(value);
+    }
+
+    private void appendToDisplay(String value) {
+        if (start) {
+            display.setText(value);
+            start = false;
+        } else {
+            display.setText(display.getText() + value);
+        }
+    }
+
+    private void setOperator(String value) {
+        if (!operator.isEmpty()) {
+            return;
+        }
+        operator = value;
+        num1 = parseOperand(display.getText()).orElse(0.0);
+        display.setText(display.getText() + " " + value + " ");
+    }
+
+    private boolean isOperatorEmpty() {
+        return operator.isEmpty();
+    }
+
+    private boolean isValidExpression() {
+        return display.getText().split(" ").length >= 3;
+    }
+
+    private Optional<Double> parseOperand(String text) {
+        try {
+            return Optional.of(Double.parseDouble(text));
+        } catch (NumberFormatException e) {
+            display.setText("Error");
+            return Optional.empty();
+        }
+    }
+
+    private void resetDisplay() {
         display.setText("");
+        resetState();
+    }
+
+    private void resetState() {
         num1 = 0;
         operator = "";
         start = true;
-    }
-
-    @FXML
-    void handleSignChangeAction(javafx.event.ActionEvent event) {
-        double value = Double.parseDouble(display.getText());
-        value = value * -1;
-        display.setText(formatResult(value));
-    }
-
-    @FXML
-    public void handlePercentageAction(javafx.event.ActionEvent event) {
-        double value = Double.parseDouble(display.getText());
-        value = value / 100;
-        display.setText(formatResult(value));
     }
 
     private double calculate(double num1, double num2, String operator) {
@@ -76,13 +117,25 @@ public class CalculatorController {
             case "+" -> num1 + num2;
             case "-" -> num1 - num2;
             case "*" -> num1 * num2;
-            case "/" -> num2 == 0 ? 0 : num1 / num2;
+            case "÷" -> num2 == 0 ? Double.NaN : num1 / num2;
+            default -> 0;
+        };
+    }
+
+    private double calculatePercentage(double base, double percentage, String operator) {
+        return switch (operator) {
+            case "+" -> base + (base * percentage);
+            case "-" -> base - (base * percentage);
+            case "*" -> base * percentage;
+            case "÷" -> base / percentage;
             default -> 0;
         };
     }
 
     private String formatResult(double result) {
-        if (result == (int) result) {
+        if (Double.isNaN(result)) {
+            return "Error";
+        } else if (result == (int) result) {
             return String.valueOf((int) result);
         } else {
             return String.valueOf(result);
