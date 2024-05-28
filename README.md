@@ -36,8 +36,7 @@ project-root/
 │   │   │                   └── CalculatorController.java
 │   │   ├── resources/
 │   │   │   └── view/
-│   │   │       └── calculator_view.fxml
-├── src/
+│   │   │       └── calculator.fxml
 │   ├── test/
 │   │   ├── java/
 │   │   │   └── com/
