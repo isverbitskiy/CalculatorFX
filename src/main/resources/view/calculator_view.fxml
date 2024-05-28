@@ -5,39 +5,49 @@
 <?import javafx.scene.layout.*?>
 <GridPane xmlns:fx="http://javafx.com/fxml/1"
           fx:controller="com.example.calculator.controller.CalculatorController"
-          hgap="10" vgap="10" alignment="center">
+          alignment="center"
+          hgap="6" vgap="6">
     <padding>
-        <Insets top="20" right="20" bottom="20" left="20"/>
+        <Insets top="12" right="6" bottom="6" left="6"/>
     </padding>
-    <TextField fx:id="display" GridPane.columnSpan="4" prefHeight="50" prefWidth="200"/>
-    <Button text="1" onAction="#handleButtonAction" GridPane.rowIndex="1" GridPane.columnIndex="0" prefHeight="50"
-            prefWidth="50"/>
-    <Button text="2" onAction="#handleButtonAction" GridPane.rowIndex="1" GridPane.columnIndex="1" prefHeight="50"
-            prefWidth="50"/>
-    <Button text="3" onAction="#handleButtonAction" GridPane.rowIndex="1" GridPane.columnIndex="2" prefHeight="50"
-            prefWidth="50"/>
-    <Button text="+" onAction="#handleButtonAction" GridPane.rowIndex="1" GridPane.columnIndex="3" prefHeight="50"
-            prefWidth="50"/>
-    <Button text="4" onAction="#handleButtonAction" GridPane.rowIndex="2" GridPane.columnIndex="0" prefHeight="50"
-            prefWidth="50"/>
-    <Button text="5" onAction="#handleButtonAction" GridPane.rowIndex="2" GridPane.columnIndex="1" prefHeight="50"
-            prefWidth="50"/>
-    <Button text="6" onAction="#handleButtonAction" GridPane.rowIndex="2" GridPane.columnIndex="2" prefHeight="50"
-            prefWidth="50"/>
-    <Button text="-" onAction="#handleButtonAction" GridPane.rowIndex="2" GridPane.columnIndex="3" prefHeight="50"
-            prefWidth="50"/>
-    <Button text="7" onAction="#handleButtonAction" GridPane.rowIndex="3" GridPane.columnIndex="0" prefHeight="50"
-            prefWidth="50"/>
-    <Button text="8" onAction="#handleButtonAction" GridPane.rowIndex="3" GridPane.columnIndex="1" prefHeight="50"
-            prefWidth="50"/>
-    <Button text="9" onAction="#handleButtonAction" GridPane.rowIndex="3" GridPane.columnIndex="2" prefHeight="50"
-            prefWidth="50"/>
-    <Button text="÷" onAction="#handleButtonAction" GridPane.rowIndex="3" GridPane.columnIndex="3" prefHeight="50"
-            prefWidth="50"/>
-    <Button text="C" onAction="#handleResetAction" GridPane.rowIndex="4" GridPane.columnIndex="0" prefHeight="50"
-            prefWidth="50"/>
-    <Button text="0" onAction="#handleButtonAction" GridPane.rowIndex="4" GridPane.columnIndex="1" prefHeight="50"
-            prefWidth="50"/>
-    <Button text="=" onAction="#handleEqualAction" GridPane.rowIndex="4" GridPane.columnIndex="2"
-            GridPane.columnSpan="2" prefHeight="50" prefWidth="110"/>
+    <TextField fx:id="display" GridPane.columnSpan="4" prefHeight="50" prefWidth="210"
+               style="-fx-font-size: 24px; -fx-alignment: center-right;"/>
+    <Button text="C" onAction="#handleResetAction" GridPane.rowIndex="1" GridPane.columnIndex="0" prefHeight="50"
+            prefWidth="50" style="-fx-font-size: 18px;"/>
+    <Button text="+/-" onAction="#handleSignChangeAction" GridPane.rowIndex="1" GridPane.columnIndex="1" prefHeight="50"
+            prefWidth="50" style="-fx-font-size: 18px;"/>
+    <Button text="\%" onAction="#handlePercentageAction" GridPane.rowIndex="1" GridPane.columnIndex="2" prefHeight="50"
+            prefWidth="50" style="-fx-font-size: 18px;"/>
+    <Button text="÷" onAction="#handleButtonAction" GridPane.rowIndex="1" GridPane.columnIndex="3" prefHeight="50"
+            prefWidth="50" style="-fx-font-size: 18px;"/>
+    <Button text="7" onAction="#handleButtonAction" GridPane.rowIndex="2" GridPane.columnIndex="0" prefHeight="50"
+            prefWidth="50" style="-fx-font-size: 18px;"/>
+    <Button text="8" onAction="#handleButtonAction" GridPane.rowIndex="2" GridPane.columnIndex="1" prefHeight="50"
+            prefWidth="50" style="-fx-font-size: 18px;"/>
+    <Button text="9" onAction="#handleButtonAction" GridPane.rowIndex="2" GridPane.columnIndex="2" prefHeight="50"
+            prefWidth="50" style="-fx-font-size: 18px;"/>
+    <Button text="*" onAction="#handleButtonAction" GridPane.rowIndex="2" GridPane.columnIndex="3" prefHeight="50"
+            prefWidth="50" style="-fx-font-size: 18px;"/>
+    <Button text="4" onAction="#handleButtonAction" GridPane.rowIndex="3" GridPane.columnIndex="0" prefHeight="50"
+            prefWidth="50" style="-fx-font-size: 18px;"/>
+    <Button text="5" onAction="#handleButtonAction" GridPane.rowIndex="3" GridPane.columnIndex="1" prefHeight="50"
+            prefWidth="50" style="-fx-font-size: 18px;"/>
+    <Button text="6" onAction="#handleButtonAction" GridPane.rowIndex="3" GridPane.columnIndex="2" prefHeight="50"
+            prefWidth="50" style="-fx-font-size: 18px;"/>
+    <Button text="-" onAction="#handleButtonAction" GridPane.rowIndex="3" GridPane.columnIndex="3" prefHeight="50"
+            prefWidth="50" style="-fx-font-size: 18px;"/>
+    <Button text="1" onAction="#handleButtonAction" GridPane.rowIndex="4" GridPane.columnIndex="0" prefHeight="50"
+            prefWidth="50" style="-fx-font-size: 18px;"/>
+    <Button text="2" onAction="#handleButtonAction" GridPane.rowIndex="4" GridPane.columnIndex="1" prefHeight="50"
+            prefWidth="50" style="-fx-font-size: 18px;"/>
+    <Button text="3" onAction="#handleButtonAction" GridPane.rowIndex="4" GridPane.columnIndex="2" prefHeight="50"
+            prefWidth="50" style="-fx-font-size: 18px;"/>
+    <Button text="+" onAction="#handleButtonAction" GridPane.rowIndex="4" GridPane.columnIndex="3" prefHeight="50"
+            prefWidth="50" style="-fx-font-size: 18px;"/>
+    <Button text="0" onAction="#handleButtonAction" GridPane.rowIndex="5" GridPane.columnIndex="0"
+            GridPane.columnSpan="2" prefHeight="50" prefWidth="100" style="-fx-font-size: 18px;"/>
+    <Button text="." onAction="#handleButtonAction" GridPane.rowIndex="5" GridPane.columnIndex="2" prefHeight="50"
+            prefWidth="50" style="-fx-font-size: 18px;"/>
+    <Button text="=" onAction="#handleEqualAction" GridPane.rowIndex="5" GridPane.columnIndex="3" prefHeight="50"
+            prefWidth="50" style="-fx-font-size: 18px;"/>
 </GridPane>

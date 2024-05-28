@@ -5,16 +5,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class CalculatorApp extends Application {
+
     public static void main(String[] args) {
-        launch(args);
+        launch();
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/calculator_view.fxml"));
-        primaryStage.setScene(new Scene(loader.load()));
-        primaryStage.setTitle("Calculator");
-        primaryStage.show();
+    public void start(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(CalculatorApp.class.getResource("/view/calculator_view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 300, 400);
+        stage.setTitle("Calculator");
+        stage.setScene(scene);
+        stage.show();
     }
 }
