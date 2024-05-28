@@ -52,9 +52,10 @@ public class CalculatorControllerTest extends ApplicationTest {
     @Test
     public void testDivision() {
         controller.handleButtonAction(TestHelper.createButtonEvent("7"));
-        controller.handleButtonAction(TestHelper.createButtonEvent("/"));
+        controller.handleButtonAction(TestHelper.createButtonEvent("÷"));
         controller.handleButtonAction(TestHelper.createButtonEvent("2"));
         controller.handleEqualAction(TestHelper.createButtonEvent("="));
+
         assertEquals("3.5", controller.display.getText());
     }
 
@@ -80,5 +81,49 @@ public class CalculatorControllerTest extends ApplicationTest {
         controller.handlePercentageAction(TestHelper.createButtonEvent("%"));
 
         assertEquals("0.5", controller.display.getText());
+    }
+
+    @Test
+    public void testAdditionWithPercentage() {
+        controller.handleButtonAction(TestHelper.createButtonEvent("100"));
+        controller.handleButtonAction(TestHelper.createButtonEvent("+"));
+        controller.handleButtonAction(TestHelper.createButtonEvent("50"));
+        controller.handlePercentageAction(TestHelper.createButtonEvent("%"));
+        controller.handleEqualAction(TestHelper.createButtonEvent("="));
+
+        assertEquals("150", controller.display.getText());
+    }
+
+    @Test
+    public void testSubtractionWithPercentage() {
+        controller.handleButtonAction(TestHelper.createButtonEvent("200"));
+        controller.handleButtonAction(TestHelper.createButtonEvent("-"));
+        controller.handleButtonAction(TestHelper.createButtonEvent("50"));
+        controller.handlePercentageAction(TestHelper.createButtonEvent("%"));
+        controller.handleEqualAction(TestHelper.createButtonEvent("="));
+
+        assertEquals("100", controller.display.getText());
+    }
+
+    @Test
+    public void testMultiplicationWithPercentage() {
+        controller.handleButtonAction(TestHelper.createButtonEvent("50"));
+        controller.handleButtonAction(TestHelper.createButtonEvent("*"));
+        controller.handleButtonAction(TestHelper.createButtonEvent("20"));
+        controller.handlePercentageAction(TestHelper.createButtonEvent("%"));
+        controller.handleEqualAction(TestHelper.createButtonEvent("="));
+
+        assertEquals("10", controller.display.getText());
+    }
+
+    @Test
+    public void testDivisionWithPercentage() {
+        controller.handleButtonAction(TestHelper.createButtonEvent("50"));
+        controller.handleButtonAction(TestHelper.createButtonEvent("÷"));
+        controller.handleButtonAction(TestHelper.createButtonEvent("20"));
+        controller.handlePercentageAction(TestHelper.createButtonEvent("%"));
+        controller.handleEqualAction(TestHelper.createButtonEvent("="));
+
+        assertEquals("250", controller.display.getText());
     }
 }

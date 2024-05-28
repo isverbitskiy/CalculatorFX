@@ -48,22 +48,24 @@ public class CalculatorController {
 
     @FXML
     public void handlePercentageAction(javafx.event.ActionEvent event) {
-        if (isOperatorEmpty() || start) {
-            return;
-        }
         String[] parts = display.getText().split(" ");
-        if (parts.length < 3) {
-            return;
+        if (parts.length == 1) {
+            // Handle percentage of a single number
+            double value = parseOperand(parts[0]).orElse(0.0);
+            double result = value / 100;
+            display.setText(formatResult(result));
+        } else if (parts.length >= 3 && !isOperatorEmpty()) {
+            // Handle percentage of an operation
+            double base = parseOperand(parts[0]).orElse(0.0);
+            double percentage = parseOperand(parts[2]).orElse(0.0) / 100;
+            double result = calculatePercentage(base, percentage, operator);
+            display.setText(formatResult(result));
+            resetState();
         }
-        double base = parseOperand(parts[0]).orElse(0.0);
-        double percentage = parseOperand(parts[2]).orElse(0.0) / 100;
-        double result = calculatePercentage(base, percentage, operator);
-        display.setText(formatResult(result));
-        resetState();
     }
 
     private boolean isNumeric(String value) {
-        return "0123456789.".contains(value);
+        return value.matches("\\d*\\.?\\d+");
     }
 
     private void appendToDisplay(String value) {
@@ -127,7 +129,7 @@ public class CalculatorController {
             case "+" -> base + (base * percentage);
             case "-" -> base - (base * percentage);
             case "*" -> base * percentage;
-            case "÷" -> base / percentage;
+            case "÷" -> percentage == 0 ? Double.NaN : base / percentage;
             default -> 0;
         };
     }
